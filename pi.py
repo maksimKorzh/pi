@@ -31,15 +31,12 @@ def main(stdscr):
       for cl in range(C):
         bcl = cl + x
         try:
-          if rw == R:
-            #s.attron(curses.color_pair(2))
-            s.addch(rw, cl, b[-1][bcl])
+          if rw == R: s.addch(rw, cl, b[-1][bcl])
           else: s.addch(rw, cl, b[brw][bcl]) if brw != len(b)-1 else ''
         except: pass
       s.clrtoeol()
       try: s.addch('\n')
       except: pass
-
     s.attron(curses.color_pair(2))
     stat = src + ' - ' + str(len(b)-1) + ' lines'
     #stat += ' modified' if self.modified else ' saved'
@@ -51,7 +48,6 @@ def main(stdscr):
       try: s.addstr(R, 0, stat)
       except: pass
     s.attron(curses.color_pair(1))
-
     curses.curs_set(0);
     s.move(r - y, c - x) if m else s.move(R, c - x)
     curses.curs_set(1); s.refresh(); ch = -1;
