@@ -8,7 +8,11 @@
     "exec": "cont=''\nfor l in b[:-1]: cont += ''.join([chr(c) for c in l]) + '\\n'\nwith open(src, 'w') as f: f.write(cont)"
   },
   "home": {
-     "bind": "((ord('v')) & 0x1f) == ch",
-     "exec": "exec('cx=0')"
+     "bind": "curses.KEY_HOME == ch",
+     "exec": "c=0"
+  },
+  "end": {
+     "bind": "curses.KEY_END == ch",
+     "exec": "c=len(b[r])"
   }
 }
