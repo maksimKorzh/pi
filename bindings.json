@@ -75,11 +75,11 @@
     "bind": "ch == ((ord('v')) & 0x1f)",
     "exec": ["b.insert(r, line)"]
   },
-  "shift-tab": {
-    "bind": "ch == ((9) & 0x1f)",
-    "exec": ["for i in range(4): b[r].insert(c, ' '); c+=1"]
-  },
   "tab": {
+    "bind": "ch == ((9) & 0x1f)",
+    "exec": ["for i in range(4): b[r].insert(c, ord(' ')); c+=1"]
+  },
+  "shift-tab": {
     "bind": "ch == 353",
     "exec": ["c+=4"]
   }

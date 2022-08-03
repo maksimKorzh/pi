@@ -15,6 +15,9 @@ def main(stdscr):
   s.nodelay(1)
   curses.noecho()
   curses.raw()
+  curses.start_color()
+  curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
+  curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
   R, C = s.getmaxyx(); R -= 1
   r, c, x, y = [0] * 4; m = 1
   while(True):  
@@ -27,12 +30,29 @@ def main(stdscr):
       brw = rw + y
       for cl in range(C):
         bcl = cl + x
-        try: s.addch(rw, cl, b[-1][bcl]) if rw == R else s.addch(rw, cl, b[brw][bcl]) if brw != len(b)-1 else ''
+        try:
+          if rw == R:
+            #s.attron(curses.color_pair(2))
+            s.addch(rw, cl, b[-1][bcl])
+          else: s.addch(rw, cl, b[brw][bcl]) if brw != len(b)-1 else ''
         except: pass
       s.clrtoeol()
       try: s.addch('\n')
       except: pass
-    curses.curs_set(0); s.move(0, 0)
+
+    s.attron(curses.color_pair(2))
+    stat = src + ' - ' + str(len(b)-1) + ' lines'
+    #stat += ' modified' if self.modified else ' saved'
+    pos = 'Row ' + str(r+1) + ', Col ' + str(c+1)
+    while len(stat) < C - len(pos)-1: stat += ' '
+    stat += pos + ' '
+    if len(stat) > C: stat = stat[:self.COLS]
+    if r != len(b)-1:
+      try: s.addstr(R, 0, stat)
+      except: pass
+    s.attron(curses.color_pair(1))
+
+    curses.curs_set(0);
     s.move(r - y, c - x) if m else s.move(R, c - x)
     curses.curs_set(1); s.refresh(); ch = -1;
     while (ch == -1): ch = s.getch()
@@ -41,7 +61,7 @@ def main(stdscr):
     if ((ord('e')) & 0x1f) == ch: m ^= 1; cur[0] = r; cur[1] = c; r = len(b)-1; c = 0;
     if ((ch) & 0x1f) != ch and ch < 128: b[r].insert(c, ch); c += 1
     if ch == ord('\n') and not m:
-      m ^= 1;
+      m ^= 1
       try: exec(''.join([chr(i) for i in b[-1]]), globals())
       except Exception as e: s.move(R, 0); s.addstr(str(e)); s.refresh(); time.sleep(3);
       b[-1] = []; r = cur[0]; c = cur[1]; continue
