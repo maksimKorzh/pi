@@ -74,6 +74,19 @@
   "ctrl-v": {
     "bind": "ch == ((ord('v')) & 0x1f)",
     "exec": ["b.insert(r, line)"]
+  },
+  "ctrl-tab": {
+    "bind": "ch == ((9) & 0x1f)",
+    "exec": ["c+=4"]
+  },
+  "shift-tab": {
+    "bind": "ch == 353",
+    "exec": [
+      "for i in range(4):",
+      "  if c == 0: break",
+      "  c -= 1",
+      "  del b[r][c]"
+    ]
   }
 }
 
