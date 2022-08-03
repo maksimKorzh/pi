@@ -1,3 +1,14 @@
 {
-  "exit": "exec(sys.exit(), globals())"
+  "quit": {
+    "bind": "((ord('z')) & 0x1f) == ch",
+    "exec": "sys.exit()"
+  },
+  "save": {
+    "bind": "((ord('s')) & 0x1f) == ch",
+    "exec": "cont=''\nfor l in b[:-1]: cont += ''.join([chr(c) for c in l]) + '\\n'\nwith open(src, 'w') as f: f.write(cont)"
+  },
+  "home": {
+     "bind": "((ord('v')) & 0x1f) == ch",
+     "exec": "exec('cx=0')"
+  }
 }

@@ -36,9 +36,9 @@ def main(stdscr):
     s.move(r - y, c - x) if m else s.move(R, c - x)
     curses.curs_set(1); s.refresh(); ch = -1;
     while (ch == -1): ch = s.getch()
-    [exec(com[key]['exec'], globals().update({'ch': ch})) for key in com.keys() if eval(com[key]['bind'])]
+    [exec(com[key]['command'], globals().update({'ch': ch})) for key in com.keys() if eval(com[key]['bind'])]
     if ch == curses.KEY_RESIZE: R, C = s.getmaxyx(); R -= 1; s.refresh(); y = 0
-    if ((ord('x')) & 0x1f) == ch: m ^= 1; cy = r; cx = c; r = len(b)-1; c = 0;
+    if ((ord('c')) & 0x1f) == ch: m ^= 1; cy = r; cx = c; r = len(b)-1; c = 0;
     if ((ch) & 0x1f) != ch and ch < 128: b[r].insert(c, ch); c += 1
     if ch == ord('\n') and not m:
       m ^= 1;
