@@ -23,23 +23,29 @@ while(True):
     brw = rw + y
     for cl in range(C):
       bcl = cl + x
-      try: s.addch(rw, cl, b[brw][bcl]) if rw < R else s.addch(rw, cl, b[-1][bcl])
+      try: s.addch(rw, cl, b[-1][bcl]) if rw == R else s.addch(rw, cl, b[brw][bcl]) if brw != len(b)-1 else ''
       except: pass
     s.clrtoeol()
-    try: s.addch('\n') if brw < len(b)-1 else s.addstr('~\n')
+    try: s.addch('\n') if brw < len(b)-1 else s.addstr('~\n') if rw != R else ''
     except: pass
   s.move(r - y, c - x) if m else s.move(R, c - x)
   curses.curs_set(1); s.refresh(); ch = -1;
   while (ch == -1): ch = s.getch()
+  if ch == curses.KEY_RESIZE: R, C = s.getmaxyx(); R -= 1; s.refresh(); y = r - R+1
   if ((ord('q')) & 0x1f) == ch: m ^= 1; ro = r; co = c; r = len(b)-1; c = 0;
   if ((ch) & 0x1f) != ch and ch < 128: b[r].insert(c, ch); c += 1
-  if ch == ord('\n') and not m: m ^= 1; b[-1] = []; r = ro; c = co; continue
+  if ch == ord('\n') and not m:
+    m ^= 1;
+    try: exec(b[-1], globals());
+    except: pass
+    b[-1] = []; r = ro; c = co; continue
   if ch == ord('\n'): l = b[r][c:]; b[r] = b[r][:c]; r += 1; c = 0; b.insert(r, [] + l)
   if ch == curses.KEY_BACKSPACE and c: c -= 1; del b[r][c]
   elif ch == curses.KEY_BACKSPACE and c == 0 and r and m: l = b[r][c:]; del b[r]; r -= 1; c = len(b[r]); b[r] += l
   rw = b[r] if r < len(b)-1 else None
   if ch == curses.KEY_LEFT and c != 0: c -= 1
-  elif ch == curses.KEY_LEFT and c == 0 and r > 0: r -= 1; c = len(b[r])
+  elif ch == curses.KEY_LEFT and c == 0 and r > 0 and m: r -= 1; c = len(b[r])
+  if ch == curses.KEY_RIGHT and not m: c += 1
   if ch == curses.KEY_RIGHT and rw is not None and c < len(rw): c += 1
   elif ch == curses.KEY_RIGHT and rw is not None and c == len(rw) and r < len(b)-2: r += 1; c = 0
   if ch == curses.KEY_UP and r != 0: r -= 1
