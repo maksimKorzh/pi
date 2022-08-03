@@ -57,9 +57,24 @@
       "except: pass",
       "idx += 1"
     ]
+  },
+  "ctrl-x": {
+    "bind": "ch == ((ord('x')) & 0x1f)",
+    "exec": [
+        "if len(b) > 2:",
+        "  try: line = b[r]; del b[r]; c = 0",
+        "  except: pass",
+        "  if r >= len(b)-2: r = len(b)-2"
+    ]
+  },
+  "ctrl-c": {
+    "bind": "ch == ((ord('c')) & 0x1f)",
+    "exec": ["line = b[r]"]
+  },
+  "ctrl-v": {
+    "bind": "ch == ((ord('v')) & 0x1f)",
+    "exec": ["b.insert(r, line)"]
   }
-
 }
-
 
 
