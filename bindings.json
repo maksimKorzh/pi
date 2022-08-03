@@ -1,0 +1,34 @@
+{
+  "quit": {
+    "bind": "ch == ((ord('z')) & 0x1f)",
+    "exec": "sys.exit()"
+  },
+  "save": {
+    "bind": "ch == ((ord('s')) & 0x1f)",
+    "exec": "cont=''\nfor l in b[:-1]: cont += ''.join([chr(c) for c in l]) + '\\n'\nwith open(src, 'w') as f: f.write(cont)"
+  },
+  "home": {
+    "bind": "ch == curses.KEY_HOME",
+    "exec": "c=0"
+  },
+  "end": {
+    "bind": "ch == curses.KEY_END == ch",
+    "exec": "c=len(b[r])"
+  },
+  "ctrl-home": {
+    "bind": "ch == 530",
+    "exec": "r=len(b)-2"
+  },
+  "ctrl-end": {
+    "bind": "ch == 535",
+    "exec": "r=0"
+  },
+  "page-down": {
+    "bind": "ch == curses.KEY_NPAGE",
+    "exec": "if r+R <= len(b)-2: r+=R\nelse: r=len(b)-2"
+  },
+  "page-up": {
+    "bind": "ch == curses.KEY_PPAGE",
+    "exec": "if r-R >=0: r-=R\nelse: r=0"
+  }
+}

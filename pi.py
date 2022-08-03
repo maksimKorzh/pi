@@ -1,6 +1,6 @@
 #!/bin/python3
 import curses, json, sys, os, time
-with open('commands.json') as f: com = json.loads(f.read())
+with open('bindings.json') as f: com = json.loads(f.read())
 cur = [0, 0]; b = []; src = ''; ch = ''; s = None
 try:
   with open(sys.argv[1]) as f: content = f.read().split('\n')
@@ -9,7 +9,7 @@ try:
   src = sys.argv[1]
 except: b.append([]); b.append([])
 def main(stdscr):
-  global R, C, cur, b, ch, s, r, c, x, y
+  global R, C, s, r, c, x, y, ch
   s = curses.initscr()
   s.keypad(True)
   s.nodelay(1)
@@ -30,7 +30,7 @@ def main(stdscr):
         try: s.addch(rw, cl, b[-1][bcl]) if rw == R else s.addch(rw, cl, b[brw][bcl]) if brw != len(b)-1 else ''
         except: pass
       s.clrtoeol()
-      try: s.addch('\n') if brw < len(b)-1 else s.addstr('~\n') if rw != R else ''
+      try: s.addch('\n')
       except: pass
     curses.curs_set(0); s.move(0, 0)
     s.move(r - y, c - x) if m else s.move(R, c - x)
@@ -42,7 +42,7 @@ def main(stdscr):
     if ((ch) & 0x1f) != ch and ch < 128: b[r].insert(c, ch); c += 1
     if ch == ord('\n') and not m:
       m ^= 1;
-      try: exec(''.join([chr(i) for i in b[-1]]), globals());
+      try: exec(''.join([chr(i) for i in b[-1]]), globals())
       except Exception as e: s.move(R, 0); s.addstr(str(e)); s.refresh(); time.sleep(3);
       b[-1] = []; r = cur[0]; c = cur[1]; continue
     if ch == ord('\n'): l = b[r][c:]; b[r] = b[r][:c]; r += 1; c = 0; b.insert(r, [] + l)
@@ -54,8 +54,8 @@ def main(stdscr):
     if ch == curses.KEY_RIGHT and not m: c += 1
     if ch == curses.KEY_RIGHT and rw is not None and c < len(rw): c += 1
     elif ch == curses.KEY_RIGHT and rw is not None and c == len(rw) and r < len(b)-2: r += 1; c = 0
-    if ch == curses.KEY_UP and r != 0: r -= 1
-    if ch == curses.KEY_DOWN and r < len(b)-2: r += 1
+    if ch == curses.KEY_UP and m and r != 0: r -= 1
+    if ch == curses.KEY_DOWN and m and r < len(b)-2: r += 1
     rw = b[r] if r < len(b) else None; rwlen = len(rw) if rw is not None else 0
     if c > rwlen: c = rwlen
 curses.wrapper(main)
