@@ -1,34 +1,56 @@
 {
-  "quit": {
+  "ctrl-z": {
     "bind": "ch == ((ord('z')) & 0x1f)",
-    "exec": "sys.exit()"
+    "exec": ["sys.exit()"]
   },
-  "save": {
+  "ctrl-s": {
     "bind": "ch == ((ord('s')) & 0x1f)",
-    "exec": "cont=''\nfor l in b[:-1]: cont += ''.join([chr(c) for c in l]) + '\\n'\nwith open(src, 'w') as f: f.write(cont)"
+    "exec": [
+      "cont=''",
+      "for l in b[:-1]: cont += ''.join([chr(c) for c in l]) + '\\n'",
+      "with open(src, 'w') as f: f.write(cont)"
+    ]
   },
   "home": {
     "bind": "ch == curses.KEY_HOME",
-    "exec": "c=0"
+    "exec": ["c=0"]
   },
   "end": {
     "bind": "ch == curses.KEY_END == ch",
-    "exec": "c=len(b[r])"
+    "exec": ["c=len(b[r])"]
   },
   "ctrl-home": {
     "bind": "ch == 530",
-    "exec": "r=len(b)-2"
+    "exec": ["r=len(b)-2"]
   },
   "ctrl-end": {
     "bind": "ch == 535",
-    "exec": "r=0"
+    "exec": ["r=0"]
   },
   "page-down": {
     "bind": "ch == curses.KEY_NPAGE",
-    "exec": "if r+R <= len(b)-2: r+=R\nelse: r=len(b)-2"
+    "exec": ["if r+R <= len(b)-2: r+=R\nelse: r=len(b)-2"]
   },
   "page-up": {
     "bind": "ch == curses.KEY_PPAGE",
-    "exec": "if r-R >=0: r-=R\nelse: r=0"
+    "exec": ["if r-R >=0: r-=R\nelse: r=0"]
+  },
+  "ctrl-f": {
+    "bind": "ch == ((ord('f')) & 0x1f)",
+    "exec": [
+      "req = []; idx = 0",
+      "for row in range(len(b)-1):",
+      "  buffrow = b[row]",
+      "  for col in range(len(buffrow)):",
+      "    if ''.join([chr(c) for c in buffrow[col:col+len(req)]]) == req:",
+      "      res.append([row, col])",
+      "if len(res):",
+      "  r, c = res[idx]; idx += 1"
+    ]
   }
 }
+
+
+
+
+

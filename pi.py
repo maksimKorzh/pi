@@ -1,7 +1,7 @@
 #!/bin/python3
 import curses, json, sys, os, time
 with open('bindings.json') as f: com = json.loads(f.read())
-cur = [0, 0]; b = []; src = ''; ch = ''; s = None
+cur = [0, 0]; b = []; src = ''; ch = ''; s = None; req = ''; res = []; idx = 0
 try:
   with open(sys.argv[1]) as f: content = f.read().split('\n')
   for rw in content[:-1]: b.append([ord(c) for c in rw])
@@ -36,7 +36,7 @@ def main(stdscr):
     s.move(r - y, c - x) if m else s.move(R, c - x)
     curses.curs_set(1); s.refresh(); ch = -1;
     while (ch == -1): ch = s.getch()
-    [exec(com[key]['exec'], globals()) for key in com.keys() if eval(com[key]['bind'])]; 
+    [exec('\n'.join(com[key]['exec']), globals()) for key in com.keys() if eval(com[key]['bind'])]; 
     if ch == curses.KEY_RESIZE: R, C = s.getmaxyx(); R -= 1; s.refresh(); y = 0
     if ((ord('x')) & 0x1f) == ch: m ^= 1; cur[0] = r; cur[1] = c; r = len(b)-1; c = 0;
     if ((ch) & 0x1f) != ch and ch < 128: b[r].insert(c, ch); c += 1
