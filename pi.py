@@ -3,8 +3,8 @@ import curses, json, sys, os, time
 with open('bindings.json') as f: com = json.loads(f.read())
 cur = [0, 0]; b = []; src = ''; ch = ''; s = None; req = ''; res = []; idx = 0; line = []
 try:
-  with open(sys.argv[1]) as f: content = f.read().split('\n')
-  for rw in content[:-1]: b.append([ord(c) for c in rw])
+  with open(sys.argv[1]) as f: cont = f.read().split('\n')
+  for rw in cont[:-1] if len(cont) > 1 else cont: b.append([ord(c) for c in rw])
   b.append([])
   src = sys.argv[1]
 except: b.append([]); b.append([])
