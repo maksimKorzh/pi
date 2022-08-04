@@ -16,7 +16,6 @@ Tiny terminal based text editor with python shell
     the power of VIM without a need to learn anything about the
     text editor?
 
-
 # Idea
     Text editing features are all about manipulating the buffer
     or positioning the cursor. In PI you can do it programmatically
@@ -84,7 +83,7 @@ cur=[3,4]
     Now imagine how many things you can do with this setup, here're just a few examples:
     1. Cutting/Copying & pasting customly selected blocks of text like VIM does in visual mode
     2. Bulk variable initialization
-    3. Regular expression matches
+    3. Regular expressions to match patterns
     4. Executing OS commands and managing their outputs
     5. Or even making HTTP request to a certain URL and pasting it's response into a buffer
 
