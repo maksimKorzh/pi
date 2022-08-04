@@ -37,7 +37,7 @@ Tiny terminal based text editor with python shell
     Let's take the previous example and see how it works in action,
     say we want to replace all the occurrences of a string in a given row:
 
-    <strong>b[4]=[ord(c) for c in ''.join([chr(c) for c in b[4]]).replace('been', 'considered')]</strong>
+<strong>b[4]=[ord(c) for c in ''.join([chr(c) for c in b[4]]).replace('been', 'considered')]</strong>
 
     If you open this README with PI, press Ctrl-e to activate python shell and
     run the above line in the shell you'll get word 'been' on line 5 replaced
@@ -58,14 +58,14 @@ Tiny terminal based text editor with python shell
     As mentioned earlier you can also run 'plugins' by invoking them directly in the shell.
     For instance to exit from PI you can either press Ctrl-z or Press Ctrl-e and type:
     
-    <strong>exec(com['ctrl-z']['exec'][0])</strong>
+<strong>exec(com['ctrl-z']['exec'][0])</strong>
 
     If you have a look at navigation bindings like Ctrl-HOME or PageUP
     you'll notice that they are altering cursor's position by setting
     the values to variables 'r' - row and 'c' - col. Cursor position
-    can also be manipulate directly from the command prompt, type:
+    can also be manipulated directly from the command prompt, type:
 
-    <strong>cur=[3,4]</strong>
+<strong>cur=[3,4]</strong>
 
     and after you hit enter cursor would go to the 4th row and 5th column
     of the text buffer. The reason why different variables are used to
@@ -110,19 +110,19 @@ Tiny terminal based text editor with python shell
 
     Here's a sample plugin, allowing to save text buffer to a file:
 
-    '''json
-    {
-      {...},
-      "ctrl-s": {
-        "bind": "ch == ((ord('s')) & 0x1f)",
-        "exec": [
-          "cont=''",
-          "for l in b[:-1]: cont += ''.join([chr(c) for c in l]) + '\\n'",
-          "with open(src, 'w') as f: f.write(cont); d=0"
-        ]
-      },
-      {...}
-    }
+'''json
+{
+  {...},
+  "ctrl-s": {
+    "bind": "ch == ((ord('s')) & 0x1f)",
+    "exec": [
+      "cont=''",
+      "for l in b[:-1]: cont += ''.join([chr(c) for c in l]) + '\\n'",
+      "with open(src, 'w') as f: f.write(cont); d=0"
+    ]
+  },
+  {...}
+}
     '''
 
     You can reference/alter the editor's internal state variables from within
