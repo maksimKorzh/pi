@@ -1,5 +1,5 @@
 # PI
-Tiny terminal based text editor with python shell
+Tiny terminal based text editor for Linux with python shell
 
 # Intro
     I've been watching many VIM talks trying to explain
