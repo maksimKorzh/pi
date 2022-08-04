@@ -28,9 +28,9 @@ Tiny terminal based text editor with python shell
     of a given text and replace them with a new string. In python
     this can be achieved as simple as:
 
-'''python
-string.replace('old text', 'new text')</strong>
-'''
+```python
+string.replace('old text', 'new text')
+```
 
     PI provides a set of global variables allowing you to
     manipulate editor's internal state by changine the buffer's
@@ -39,7 +39,9 @@ string.replace('old text', 'new text')</strong>
     Let's take the previous example and see how it works in action,
     say we want to replace all the occurrences of a string in a given row:
 
-<strong>b[4]=[ord(c) for c in ''.join([chr(c) for c in b[4]]).replace('been', 'considered')]</strong>
+```python
+b[4]=[ord(c) for c in ''.join([chr(c) for c in b[4]]).replace('been', 'considered')]
+```
 
     If you open this README with PI, press Ctrl-e to activate python shell and
     run the above line in the shell you'll get word 'been' on line 5 replaced
@@ -60,14 +62,18 @@ string.replace('old text', 'new text')</strong>
     As mentioned earlier you can also run 'plugins' by invoking them directly in the shell.
     For instance to exit from PI you can either press Ctrl-z or Press Ctrl-e and type:
     
-<strong>exec(com['ctrl-z']['exec'][0])</strong>
+```python
+exec(com['ctrl-z']['exec'][0])
+```
 
     If you have a look at navigation bindings like Ctrl-HOME or PageUP
     you'll notice that they are altering cursor's position by setting
     the values to variables 'r' - row and 'c' - col. Cursor position
     can also be manipulated directly from the command prompt, type:
 
-<strong>cur=[3,4]</strong>
+```python
+cur=[3,4]
+```
 
     and after you hit enter cursor would go to the 4th row and 5th column
     of the text buffer. The reason why different variables are used to
@@ -112,7 +118,7 @@ string.replace('old text', 'new text')</strong>
 
     Here's a sample plugin, allowing to save text buffer to a file:
 
-'''json
+```json
 {
   {...},
   "ctrl-s": {
@@ -125,7 +131,7 @@ string.replace('old text', 'new text')</strong>
   },
   {...}
 }
-    '''
+```
 
     You can reference/alter the editor's internal state variables from within
     a plugin as well as from the command prompt. Here's the list of the variables:
