@@ -1,6 +1,6 @@
 {
-  "ctrl-z": {
-    "bind": "ch == ((ord('z')) & 0x1f)",
+  "ctrl-q": {
+    "bind": "ch == ((ord('q')) & 0x1f)",
     "exec": ["sys.exit()"]
   },
   "ctrl-s": {
