@@ -28,7 +28,9 @@ Tiny terminal based text editor with python shell
     of a given text and replace them with a new string. In python
     this can be achieved as simple as:
 
-    <strong>string.replace('old text', 'new text')</strong>
+'''python
+string.replace('old text', 'new text')</strong>
+'''
 
     PI provides a set of global variables allowing you to
     manipulate editor's internal state by changine the buffer's
