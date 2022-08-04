@@ -8,7 +8,7 @@
     "exec": [
       "cont=''",
       "for l in b[:-1]: cont += ''.join([chr(c) for c in l]) + '\\n'",
-      "with open(src, 'w') as f: f.write(cont)"
+      "with open(src, 'w') as f: f.write(cont); d=0"
     ]
   },
   "home": {
