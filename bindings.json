@@ -6,9 +6,11 @@
   "ctrl-s": {
     "bind": "ch == ((ord('s')) & 0x1f)",
     "exec": [
-      "cont=''",
-      "for l in b[:-1]: cont += ''.join([chr(c) for c in l]) + '\\n'",
-      "with open(src, 'w') as f: f.write(cont); d=0"
+      "try:",
+      "  cont=''",
+      "  for l in b[:-1]: cont += ''.join([chr(c) for c in l]) + '\\n'",
+      "  with open(src, 'w') as f: f.write(cont); d=0",
+      "except Exception as e: s.move(R, 0); s.addstr(str(e)); s.refresh(); time.sleep(3)"
     ]
   },
   "home": {
