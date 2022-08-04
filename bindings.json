@@ -71,7 +71,7 @@
   },
   "ctrl-c": {
     "bind": "ch == ((ord('c')) & 0x1f)",
-    "exec": ["line = b[r]"]
+    "exec": ["line = [c for c in b[r]]"]
   },
   "ctrl-v": {
     "bind": "ch == ((ord('v')) & 0x1f)",
@@ -81,9 +81,12 @@
     "bind": "ch == ((9) & 0x1f)",
     "exec": ["for i in range(4): b[r].insert(c, ord(' ')); c+=1"]
   },
-  "shift-tab": {
-    "bind": "ch == 353",
-    "exec": ["c+=4"]
+  "delete": {
+    "bind": "ch == 330",
+    "exec": [
+      "try: if len(b[r]): del b[r][c]",
+      "except: pass"
+    ]
   }
 }
 

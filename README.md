@@ -92,7 +92,7 @@ cur=[3,4]
     for instance (I just don't use it) or whatever!
 
 # Default key bindings
-    Ctrl-z        exit from the editor
+    Ctrl-q        exit from the editor
     Ctrl-e        execute python code
     Ctrl-x        cut current line of code
     Ctrl-c        copy current of line
@@ -108,7 +108,6 @@ cur=[3,4]
     Ctrl-Home     move the cursor to the beginning of the file
     Ctrl-End      move the cursor to the end of the file
     Tab           inserts 4 spaces
-    Shift-Tab     moves curso 4 space forward
 
 # How to write your own plugin
     PI plugin is a piece of python code that can be invoked in 2 ways:
