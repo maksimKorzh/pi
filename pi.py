@@ -9,6 +9,7 @@ cur = [0, 0]; b = []; src = 'noname.txt'; ch = ''; s = None;
 req = ''; res = []; idx = 0; line = []; d = 0;
 try:
   with open(sys.argv[1]) as f: cont = f.read().split('\n')
+  if ' PI: last cursor position' in cont[-2]: cur = json.loads(cont[-2].split('>')[-1]); cont = cont[:-1]
   for rw in cont[:-1] if len(cont) > 1 else cont: b.append([ord(c) for c in rw])
   b.append([])
   src = sys.argv[1]
@@ -24,7 +25,8 @@ def main(stdscr):
   curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
   curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
   R, C = s.getmaxyx(); R -= 1
-  r, c, x, y = [0] * 4; m = 1
+  x, y = [0] * 2; m = 1
+  r = cur[0]; c = cur[1]
   while(True):  
     if m:
       s.move(0, 0)
@@ -82,3 +84,4 @@ def main(stdscr):
     rw = b[r] if r < len(b) else None; rwlen = len(rw) if rw is not None else 0
     if c > rwlen: c = rwlen
 curses.wrapper(main)
+# PI: last cursor position  > [33,25]

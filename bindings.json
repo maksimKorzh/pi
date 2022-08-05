@@ -9,7 +9,10 @@
       "try:",
       "  cont=''",
       "  for l in b[:-1]: cont += ''.join([chr(c) for c in l]) + '\\n'",
-      "  with open(src, 'w') as f: f.write(cont); d=0",
+      "  comments = {'py': '#', 'txt': '>'}",
+      "  try: comment = comments[src.split('.')[-1]] + ' PI: last cursor position  > '",
+      "  except: comment = ''",
+      "  with open(src, 'w') as f: f.write(cont + comment + '[' + str(r) + ',' + str(c) +']\\n'); d=0",
       "except Exception as e: s.move(R, 0); s.addstr(str(e)); s.refresh(); time.sleep(3)"
     ]
   },
