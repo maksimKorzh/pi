@@ -71,7 +71,7 @@
   },
   "ctrl-c": {
     "bind": "ch == ((ord('c')) & 0x1f)",
-    "exec": ["line = [c for c in b[r]]"]
+    "exec": ["line = b[r]"]
   },
   "ctrl-v": {
     "bind": "ch == ((ord('v')) & 0x1f)",
