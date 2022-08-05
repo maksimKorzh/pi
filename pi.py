@@ -60,7 +60,7 @@ def main(stdscr):
     while (ch == -1): ch = s.getch(); d += 1
     [exec('\n'.join(com[key]['exec']), globals()) for key in com.keys() if eval(com[key]['bind'])]; 
     if ch == curses.KEY_RESIZE: R, C = s.getmaxyx(); R -= 1; s.refresh(); y = 0
-    if ((ord('e')) & 0x1f) == ch: m ^= 1; cur[0] = r; cur[1] = c; r = len(b)-1; c = 0;
+    if ((ord('e')) & 0x1f) == ch and m: m ^= 1; cur[0] = r; cur[1] = c; r = len(b)-1; c = 0;
     if ((ch) & 0x1f) != ch and ch < 128: b[r].insert(c, ch); c += 1;
     if ch == ord('\n') and not m:
       m ^= 1
