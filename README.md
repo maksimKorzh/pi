@@ -94,10 +94,12 @@ cur=[3,4]
 # Default key bindings
     Ctrl-q        exit from the editor
     Ctrl-e        execute python code
+    Ctrl-d        delete current line of code
     Ctrl-x        cut current line of code
     Ctrl-c        copy current of line
     Ctrl-v        paste current line of code
     Ctrl-s        save current file
+    Ctrl-w        save current file with cursor position
     
     To 'save as' press Ctrl-e, type: "src='filename'", hit Enter and Ctrl-s
 
