@@ -26,6 +26,7 @@ def main(stdscr):
   r, c, x, y = [0] * 4; m = 1
   while(True):  
     if m:
+      s.move(0, 0)
       if r < y: y = r
       if r >= y + R: y = r - R+1
       if c < x: x = c
