@@ -37,7 +37,8 @@ def main(stdscr):
       for cl in range(C):
         bcl = cl + x
         try:
-          if rw == R: s.addch(rw, cl, b[-1][bcl])
+          if rw == R and len(b[-1]) == 0: s.addch(rw, cl, ' ')
+          elif rw == R: s.addch(rw, cl, b[-1][bcl])
           else: s.addch(rw, cl, b[brw][bcl]) if brw != len(b)-1 else ''
         except: pass
       s.clrtoeol()
