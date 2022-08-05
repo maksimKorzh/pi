@@ -1,6 +1,9 @@
 #!/bin/python3
 import curses, json, sys, os, time
-with open('/usr/bin/bindings.json') as f: com = json.loads(f.read())
+try:
+  with open('/usr/bin/bindings.json') as f: com = json.loads(f.read())
+except:
+  with open('bindings.json') as f: com = json.loads(f.read())
 cur = [0, 0]; b = []; src = 'noname.txt'; ch = ''; s = None;
 req = ''; res = []; idx = 0; line = []; d = 0;
 try:
