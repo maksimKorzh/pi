@@ -1,5 +1,6 @@
 #!/bin/python3
 import curses, json, sys, os, time
+from copy import deepcopy
 try:
   with open('/usr/bin/bindings.json') as f: com = json.loads(f.read())
 except:
