@@ -75,7 +75,7 @@
   },
   "ctrl-v": {
     "bind": "ch == ((ord('v')) & 0x1f)",
-    "exec": ["b.insert(r, line)"]
+    "exec": ["b.insert(r, deepcopy(line))"]
   },
   "tab": {
     "bind": "ch == ((9) & 0x1f)",
