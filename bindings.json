@@ -3,43 +3,62 @@
     "bind": "ch == ((ord('q')) & 0x1f)",
     "exec": ["sys.exit()"]
   },
+
   "ctrl-s": {
     "bind": "ch == ((ord('s')) & 0x1f)",
     "exec": [
       "try:",
       "  cont=''",
       "  for l in b[:-1]: cont += ''.join([chr(c) for c in l]) + '\\n'",
-      "  comments = {'py': '#', 'txt': '>'}",
+      "  with open(src, 'w') as f: f.write(cont); d=0",
+      "except Exception as e: s.move(R, 0); s.addstr(str(e)); s.refresh(); time.sleep(3)"
+    ]
+  },
+
+  "ctrl-w": {
+    "bind": "ch == ((ord('w')) & 0x1f)",
+    "exec": [
+      "try:",
+      "  cont=''",
+      "  for l in b[:-1]: cont += ''.join([chr(c) for c in l]) + '\\n'",
+      "  comments = {'py': '#'}",
       "  try: comment = comments[src.split('.')[-1]] + ' PI: last cursor position  > '",
-      "  except: comment = ''",
+      "  except: comment = '! PI: last cursor position > '",
       "  with open(src, 'w') as f: f.write(cont + comment + '[' + str(r) + ',' + str(c) +']\\n'); d=0",
       "except Exception as e: s.move(R, 0); s.addstr(str(e)); s.refresh(); time.sleep(3)"
     ]
   },
+
   "home": {
     "bind": "ch == curses.KEY_HOME",
     "exec": ["c=0"]
   },
+
   "end": {
     "bind": "ch == curses.KEY_END == ch",
     "exec": ["c=len(b[r])"]
   },
+
   "ctrl-home": {
     "bind": "ch == 530",
     "exec": ["r=len(b)-2"]
   },
+
   "ctrl-end": {
     "bind": "ch == 535",
     "exec": ["r=0"]
   },
+
   "page-down": {
     "bind": "ch == curses.KEY_NPAGE",
     "exec": ["if r+R <= len(b)-2: r+=R\nelse: r=len(b)-2"]
   },
+
   "page-up": {
     "bind": "ch == curses.KEY_PPAGE",
     "exec": ["if r-R >=0: r-=R\nelse: r=0"]
   },
+
   "ctrl-f": {
     "bind": "ch == ((ord('f')) & 0x1f)",
     "exec": [
@@ -53,6 +72,7 @@
       "  r, c = res[idx]; idx += 1"
     ]
   },
+
   "ctrl-g": {
     "bind": "ch == ((ord('g')) & 0x1f)",
     "exec": [
@@ -63,6 +83,17 @@
       "idx += 1"
     ]
   },
+
+  "ctrl-d": {
+    "bind": "ch == ((ord('d')) & 0x1f)",
+    "exec": [
+        "if len(b) > 2:",
+        "  try: del b[r]; c = 0",
+        "  except: pass",
+        "  if r >= len(b)-2: r = len(b)-2"
+    ]
+  },
+
   "ctrl-x": {
     "bind": "ch == ((ord('x')) & 0x1f)",
     "exec": [
@@ -72,18 +103,22 @@
         "  if r >= len(b)-2: r = len(b)-2"
     ]
   },
+
   "ctrl-c": {
     "bind": "ch == ((ord('c')) & 0x1f)",
     "exec": ["line = b[r]"]
   },
+
   "ctrl-v": {
     "bind": "ch == ((ord('v')) & 0x1f)",
     "exec": ["b.insert(r, deepcopy(line))"]
   },
+
   "tab": {
     "bind": "ch == ((9) & 0x1f)",
     "exec": ["for i in range(4): b[r].insert(c, ord(' ')); c+=1"]
   },
+
   "delete": {
     "bind": "ch == 330",
     "exec": [
@@ -92,5 +127,3 @@
     ]
   }
 }
-
-
